@@ -1,14 +1,23 @@
 /// <reference types="Cypress" />
 
 describe("Registration functionality - Gallery App", () => {
-    
-  it("Unsuccessful registration - invalid email address", () => {
-    cy.visit("https://gallery-app.vivifyideas.com/register");
+  it.only("Unsuccessful registration - invalid email address", () => {
+    cy.visit("/register");
+
+    //ASERTACIJE
+    // provera da li smo na ispravnoj adresi
+    cy.url().should("contain", "/register");
+    //provera da li je neki tekst tacan
+    cy.get("h1").should("have.text", "Register");
+    cy.get("label").eq(0).should("have.text", "First Name");
+    cy.get("label").eq(1).should("have.text", "Last Name");
+    //primer negativne asertacije - NE SADRZI
+    cy.url().should("not.contain", "/register");
 
     // hvatanje elemenata preko ID-ja === #vrednost ID-ja
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
-    cy.get("#email").type("markoqa13+223gmail.com");
+    cy.get("#email").type("markoqa13+223@gmail.com");
     cy.get("#password").type("Marko123");
     cy.get("#password-confirmation").type("Marko123");
 
@@ -16,14 +25,16 @@ describe("Registration functionality - Gallery App", () => {
     cy.get(".form-check-input").check();
 
     // hvatanje elementa pomocu taga + vrednost nekog njegovog propertija
-    cy.get('a[role="button "]');
+    // cy.get('a[role="button "]');
 
     // hvatanje elemenata preko html tag-a
     cy.get("button").click();
+
+    cy.url().should("not.contain", "/register");
   });
 
   it("Unsuccessful registration - password too short", () => {
-    cy.visit("https://gallery-app.vivifyideas.com/register");
+    cy.visit("/register");
 
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
@@ -35,7 +46,7 @@ describe("Registration functionality - Gallery App", () => {
   });
 
   it("Unsuccessful registration - wrong password confirmation", () => {
-    cy.visit("https://gallery-app.vivifyideas.com/register");
+    cy.visit("/register");
 
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
@@ -47,7 +58,7 @@ describe("Registration functionality - Gallery App", () => {
   });
 
   it("Successful registration", () => {
-    cy.visit("https://gallery-app.vivifyideas.com/register");
+    cy.visit("/register");
 
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
@@ -61,5 +72,4 @@ describe("Registration functionality - Gallery App", () => {
 
     cy.get("a").contains("Logout");
   });
-
 });
