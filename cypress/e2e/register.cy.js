@@ -1,7 +1,9 @@
 /// <reference types="Cypress" />
 
+const locators = require('../fixtures/locators.json')
+
 describe("Registration functionality - Gallery App", () => {
-  it.only("Unsuccessful registration - invalid email address", () => {
+  it("Unsuccessful registration - invalid email address", () => {
     cy.visit("/register");
 
     //ASERTACIJE
@@ -32,16 +34,23 @@ describe("Registration functionality - Gallery App", () => {
     cy.url().should("not.contain", "/register");
   });
 
-  it("Unsuccessful registration - password too short", () => {
+  // KORISCENJE LOKATORA - umesto klasicnih getera
+
+  it.only("Unsuccessful registration - password too short", () => {
     cy.visit("/register");
 
-    cy.get("#first-name").type("Marko");
-    cy.get("#last-name").type("Djuric");
-    cy.get("#email").type("markoqa13+2231@gmail.com");
-    cy.get("#password").type("Marko");
-    cy.get("#password-confirmation").type("Marko");
-    cy.get(".form-check-input").check();
-    cy.get("button").click();
+    cy.get(locators.registrationPage.firstNameInputField)
+      .type("Marko");
+    cy.get(locators.registrationPage.lastNameInputField)
+      .type("Djuric");
+    cy.get(locators.registrationPage.emailInputField)
+      .type("markoqa13+2231@gmail.com");
+    cy.get(locators.registrationPage.passwordInputField)
+      .type("Marko");
+    cy.get(locators.registrationPage.passwordConfirmationInputField)
+      .type("Marko");
+    cy.get(locators.registrationPage.termsCheckbox).check();
+    cy.get(locators.registrationPage.submitButton).click();
   });
 
   it("Unsuccessful registration - wrong password confirmation", () => {
