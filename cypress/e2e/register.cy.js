@@ -11,25 +11,24 @@ describe("Registration functionality - Gallery App", () => {
     cy.get("h1").should("have.text", "Register");
     cy.get("label").eq(0).should("have.text", "First Name");
     cy.get("label").eq(1).should("have.text", "Last Name");
-    //primer negativne asertacije - NE SADRZI
-    cy.url().should("not.contain", "/register");
-
+    
     // hvatanje elemenata preko ID-ja === #vrednost ID-ja
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
     cy.get("#email").type("markoqa13+223@gmail.com");
     cy.get("#password").type("Marko123");
     cy.get("#password-confirmation").type("Marko123");
-
+    
     // hvatanje elemenata preko klase === .nazivKlase
     cy.get(".form-check-input").check();
-
+    
     // hvatanje elementa pomocu taga + vrednost nekog njegovog propertija
     // cy.get('a[role="button "]');
-
+    
     // hvatanje elemenata preko html tag-a
     cy.get("button").click();
-
+    
+    //primer negativne asertacije - NE SADRZI
     cy.url().should("not.contain", "/register");
   });
 
