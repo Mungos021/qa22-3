@@ -8,14 +8,14 @@ describe("Create new gallery", () => {
   //izvrsava se pre svakog pojedinacnog testa (it bloka)
   beforeEach(() => {
     cy.visit("login");
-
+    loginPage.loginUser('markoqa13@gmail.com', 'Marko123');
     // KORISCENJE POM-a umesto klasicnih getera
     // cy.get("#email").type("markoqa13@gmail.com");
-    loginPage.emailInputField.type("markoqa13@gmail.com");
-    // cy.get("#password").type("Marko123");
-    loginPage.passwordInputField.type("Marko123");
-    // cy.get("button").contains("Submit").click();
-    loginPage.submitBtn.contains("Submit").click();
+    // loginPage.emailInputField.type("markoqa13@gmail.com");
+    // // cy.get("#password").type("Marko123");
+    // loginPage.passwordInputField.type("Marko123");
+    // // cy.get("button").contains("Submit").click();
+    // loginPage.submitBtn.contains("Submit").click();
   });
 
   it.only("Succesfully create gallery with one image", () => {
