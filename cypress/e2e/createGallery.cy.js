@@ -47,7 +47,7 @@ describe("Create new gallery", () => {
     cy.contains("Submit").click();
   });
 
-  it("Negatigve 2 - Succesfully create gallery with one image", () => {
+  it("Negative 2 - Succesfully create gallery with one image", () => {
     cy.get('a[href="/create"]').should("be.visible").click();
     cy.get("h1").should("have.text", "Create Gallery");
 

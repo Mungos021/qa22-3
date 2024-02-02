@@ -3,7 +3,8 @@
 const locators = require('../fixtures/locators.json')
 
 describe("Registration functionality - Gallery App", () => {
-  it("Unsuccessful registration - invalid email address", () => {
+  it.only("Unsuccessful registration - invalid email address", () => {
+
     cy.visit("/register");
 
     //ASERTACIJE
@@ -17,7 +18,7 @@ describe("Registration functionality - Gallery App", () => {
     // hvatanje elemenata preko ID-ja === #vrednost ID-ja
     cy.get("#first-name").type("Marko");
     cy.get("#last-name").type("Djuric");
-    cy.get("#email").type("markoqa13+223@gmail.com");
+    cy.get("#email").type("markoqa13+22312321@gmail.com");
     cy.get("#password").type("Marko123");
     cy.get("#password-confirmation").type("Marko123");
     
@@ -29,6 +30,9 @@ describe("Registration functionality - Gallery App", () => {
     
     // hvatanje elemenata preko html tag-a
     cy.get("button").click();
+    cy.intercept('@successfulRegistration').then((response) => {
+      cy.log(response)
+    })
     
     //primer negativne asertacije - NE SADRZI
     cy.url().should("not.contain", "/register");
@@ -36,7 +40,7 @@ describe("Registration functionality - Gallery App", () => {
 
   // KORISCENJE LOKATORA - umesto klasicnih getera
 
-  it.only("Unsuccessful registration - password too short", () => {
+  it("Unsuccessful registration - password too short", () => {
     cy.visit("/register");
 
     cy.get(locators.registrationPage.firstNameInputField)
@@ -76,7 +80,7 @@ describe("Registration functionality - Gallery App", () => {
     cy.get(".form-check-input").check();
     cy.get("button").click();
 
-    cy.wait(3000);
+    // cy.wait(3000);
 
     cy.get("a").contains("Logout");
   });
