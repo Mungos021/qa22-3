@@ -25,7 +25,7 @@ describe("Registration functionality - Gallery App", () => {
     // hvatanje elemenata preko klase === .nazivKlase
     cy.get(".form-check-input").check();
     
-    // hvatanje elementa pomocu taga + vrednost nekog njegovog propertija
+    // hvatanje elementa pomocu taga + vrednost nekog njegovog atributa
     // cy.get('a[role="button "]');
     
     // hvatanje elemenata preko html tag-a

@@ -2,6 +2,7 @@
 
 import { loginPage } from "../page_objects/loginPage";
 
+
 describe("Create new gallery", () => {
   //before hook - izvrsava se jednom pre svih testova
   before(() => {});
@@ -10,12 +11,12 @@ describe("Create new gallery", () => {
     cy.visit("login");
     loginPage.loginUser('markoqa13@gmail.com', 'Marko123');
     // KORISCENJE POM-a umesto klasicnih getera
-    // cy.get("#email").type("markoqa13@gmail.com");
-    // loginPage.emailInputField.type("markoqa13@gmail.com");
-    // // cy.get("#password").type("Marko123");
-    // loginPage.passwordInputField.type("Marko123");
-    // // cy.get("button").contains("Submit").click();
-    // loginPage.submitBtn.contains("Submit").click();
+    cy.get("#email").type("markoqa13@gmail.com");
+    loginPage.emailInputField.type("markoqa13@gmail.com");
+    // cy.get("#password").type("Marko123");
+    loginPage.passwordInputField.type("Marko123");
+    // cy.get("button").contains("Submit").click();
+    loginPage.submitBtn.contains("Submit").click();
   });
 
   it.only("Succesfully create gallery with one image", () => {
